@@ -43,10 +43,7 @@ class ProxyRequest extends HTTP.ClientRequest
     port = options.port || port || (if protocol == "https:" then 443 else 80)
     @url = URL.parse("#{protocol}//#{host || "localhost"}:#{port}#{options.path || "/"}")
     @path = @url.path
-    @headers = {}
-    if options.headers
-      for n,v of options.headers
-        @headers[n.toLowerCase()] = if v && v.toString then v.toString() else ""
+    @headers = options.headers
 
   setHeader: (name, value)->
     assert !@ended, "Already called end"
